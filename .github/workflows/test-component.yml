@@ -14,18 +14,18 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: Tencent/tdesign-vue
-          path: target-repo
+          path: ../target-repo
 
       - uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: copy files to target-repo
-        run: cp -rf ./* target-repo/src/_common
+        run: cp -rf ./* ../target-repo/src/_common
 
       - name:
         run: |
-          cd target-repo
+          cd ../target-repo
           npm install
           npm run lint
           npm run test
@@ -39,10 +39,10 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: Tencent/tdesign-vue
-          path: target-repo
+          path: ../target-repo
 
       - name: copy files to target-repo
-        run: cp -rf ./* target-repo/package/common
+        run: cp -rf ./* ../target-repo/package/common
 
       - uses: pnpm/action-setup@v4
 
@@ -66,14 +66,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           repository: Tencent/tdesign-react
-          path: target-repo
+          path: ../target-repo
 
       - uses: actions/setup-node@v4
         with:
           node-version: 18
 
       - name: copy files to target-repo
-        run: cp -rf ./* target-repo/src/_common
+        run: cp -rf ./* ../target-repo/src/_common
 
       - name:
         run: |
