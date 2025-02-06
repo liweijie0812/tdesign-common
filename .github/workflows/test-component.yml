@@ -23,7 +23,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          
+
       - run: npm install
       - run: npm run lint
       - run: npm run test
@@ -71,7 +71,30 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          
+
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+
+  tdesign-web-components:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tdesign-web-components
+        uses: actions/checkout@v4
+        with:
+          repository: Tencent/tdesign-web-components
+
+      - name: Checkout tdesign-common
+        uses: actions/checkout@v4
+        with:
+          path: src/_common
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
       - run: npm install
       - run: npm run lint
       - run: npm run test
@@ -94,7 +117,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          
+
       - run: npm install
       - run: npm run lint
       - run: npm run test
@@ -117,8 +140,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 18
-          
+
       - run: npm install
       - run: npm run lint
       - run: npm run test
-      - run: npm run build    
+      - run: npm run build
