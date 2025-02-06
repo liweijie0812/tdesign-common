@@ -10,22 +10,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          repository: Tencent/tdesign-vue
 
       - uses: actions/checkout@v4
         with:
-          repository: Tencent/tdesign-vue
-          path: ../target-repo
+          path: src/_common
 
       - uses: actions/setup-node@v4
         with:
           node-version: 18
 
-      - name: copy files to target-repo
-        run: cp -rf ./* ../target-repo/src/_common
-
       - name:
         run: |
-          cd ../target-repo
           npm install
           npm run lint
           npm run test
