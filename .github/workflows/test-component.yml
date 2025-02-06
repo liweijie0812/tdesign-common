@@ -83,7 +83,7 @@ jobs:
       - name: Checkout tdesign-web-components
         uses: actions/checkout@v4
         with:
-          repository: Tencent/tdesign-web-components
+          repository: TDesignOteam/tdesign-web-components
 
       - name: Checkout tdesign-common
         uses: actions/checkout@v4
