@@ -9,11 +9,13 @@ jobs:
   tdesign-vue:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout tdesign-vue
+        uses: actions/checkout@v4
         with:
           repository: Tencent/tdesign-vue
 
-      - uses: actions/checkout@v4
+      - name: Checkout tdesign-common
+        uses: actions/checkout@v4
         with:
           path: src/_common
           ref: ${{ github.event.pull_request.head.sha }}
@@ -23,22 +25,23 @@ jobs:
           node-version: 18
           
       - run: npm install
-      - run: npm lint
-      - run: npm test
-      - run: npm build
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
 
   tdesign-vue-next:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/checkout@v4
+      - name: Checkout tdesign-vue-next
+        uses: actions/checkout@v4
         with:
-          repository: Tencent/tdesign-vue
-          path: ../target-repo
+          repository: Tencent/tdesign-vue-next
 
-      - name: copy files to target-repo
-        run: cp -rf ./* ../target-repo/package/common
+      - name: Checkout tdesign-common
+        uses: actions/checkout@v4
+        with:
+          path: packages/common
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - uses: pnpm/action-setup@v4
 
@@ -46,36 +49,76 @@ jobs:
         with:
           node-version: 18
 
-      - name:
-        run: |
-          cd target-repo
-          pnpm install
-          pnpm run lint
-          pnpm run test
-          pnpm run build
+      - run: pnpm install
+      - run: pnpm run lint
+      - run: pnpm run test
+      - run: pnpm run build
 
   tdesign-react:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/checkout@v4
+      - name: Checkout tdesign-react
+        uses: actions/checkout@v4
         with:
           repository: Tencent/tdesign-react
-          path: ../target-repo
+
+      - name: Checkout tdesign-common
+        uses: actions/checkout@v4
+        with:
+          path: src/_common
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - uses: actions/setup-node@v4
         with:
           node-version: 18
+          
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
 
-      - name: copy files to target-repo
-        run: cp -rf ./* ../target-repo/src/_common
+  tdesign-mobile-vue:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tdesign-mobile-vue
+        uses: actions/checkout@v4
+        with:
+          repository: Tencent/tdesign-mobile-vue
 
-      - name:
-        run: |
-          cd target-repo
-          npm install
-          npm run lint
-          npm run test
-          npm run build      
+      - name: Checkout tdesign-common
+        uses: actions/checkout@v4
+        with:
+          path: src/_common
+          ref: ${{ github.event.pull_request.head.sha }}
 
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build
+
+  tdesign-mobile-react:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout tdesign-mobile-react
+        uses: actions/checkout@v4
+        with:
+          repository: Tencent/tdesign-mobile-react
+
+      - name: Checkout tdesign-common
+        uses: actions/checkout@v4
+        with:
+          path: src/_common
+          ref: ${{ github.event.pull_request.head.sha }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          
+      - run: npm install
+      - run: npm run lint
+      - run: npm run test
+      - run: npm run build    
