@@ -1,0 +1,85 @@
+name: TEST_COMPONENT
+
+on:
+  pull_request:
+    branches: [develop]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  tdesign-vue:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: Tencent/tdesign-vue
+          path: target-repo
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: copy files to target-repo
+        run: cp -rf ./* target-repo/src/_common
+
+      - name:
+        run: |
+          cd target-repo
+          npm install
+          npm run lint
+          npm run test
+          npm run build
+
+  tdesign-vue-next:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: Tencent/tdesign-vue
+          path: target-repo
+
+      - name: copy files to target-repo
+        run: cp -rf ./* target-repo/package/common
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name:
+        run: |
+          cd target-repo
+          pnpm install
+          pnpm run lint
+          pnpm run test
+          pnpm run build
+
+  tdesign-react:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: Tencent/tdesign-react
+          path: target-repo
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: copy files to target-repo
+        run: cp -rf ./* target-repo/src/_common
+
+      - name:
+        run: |
+          cd target-repo
+          npm install
+          npm run lint
+          npm run test
+          npm run build      
+
