@@ -1,9 +1,10 @@
 name: TEST_COMPONENT
 
 on:
-  pull_request:
-    branches: [develop]
-    types: [opened, synchronize, reopened]
+    workflow_run:
+      workflows: ["MAIN_PULL_REQUEST"]
+      types:
+        - completed  
 
 jobs:
   tdesign-vue:
