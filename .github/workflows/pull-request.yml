@@ -42,7 +42,7 @@ jobs:
       - name: Save pr id
         run: echo ${{ github.event.number }} > pr-id.txt
 
-      - name: Upload pr id
+      - name: 1Upload pr id
         uses: actions/upload-artifact@v4
         with:
           name: pr-id
