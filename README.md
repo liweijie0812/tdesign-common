@@ -19,7 +19,7 @@
 
 分支拉取规则：网页组件使用 feature/web/_ ；移动端组件使用 feature/mobile/_ ；小程序使用 feature/mp/\* 。
 
-具体示例如下，1
+具体示例如下，12
 
 ```
 feature/web/button
