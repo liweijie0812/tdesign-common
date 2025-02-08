@@ -18,7 +18,7 @@ TDesign 提供五大类 Design Token，包括`颜色`、`字体`、`圆角`、`�
 
 完整的 Token 列表见 [TDesign Design Token](https://github.com/Tencent/tdesign-common/blob/develop/style/web/theme)。
 
-#### 使用主题生成器配置 CSS 变量
+#### 使用主题生成器配置 CSS 变量1
 
 因为涉及到的 CSS 变量数量很多，**我们提供了更直观的基于 CSS 变量 实现的`主题配置生成器`，来帮助您快速定制您需要的主题。您可以通过`点击官网下方的悬浮按钮`打开我们的主题配置生成器**。
 
