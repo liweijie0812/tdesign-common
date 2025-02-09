@@ -15,7 +15,7 @@
 
 [参考](./style/web/README.md)
 
-### 如何进行分支开发123
+### 如何进行分支开发1234
 
 分支拉取规则：网页组件使用 feature/web/_ ；移动端组件使用 feature/mobile/_ ；小程序使用 feature/mp/\* 。
 
