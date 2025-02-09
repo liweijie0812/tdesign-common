@@ -224,46 +224,42 @@ jobs:
               run_id: context.runId,
               per_page: 100
             })
-            const scriptJob = {
-              'lint_status': '',
-              'lint_job':''
-              'test_status': 'Test',
-              'test_job': 'Test',
-              'build_status': 'Build'
-              'build_job': 'Build'
-            }
             const tdesign = {
-              'tdesign-vue': { ...scriptJob },
-              'tdesign-vue-next': { ...scriptJob },
-              'tdesign-react': { ...scriptJob },
-              'tdesign-web-components': { ...scriptJob },
-              'tdesign-mobile-vue': { ...scriptJob },
-              'tdesign-mobile-react': { ...scriptJob },,
-            }
-            jobs.filter(job => job.name.startsWith('tdesign-')).map(job => {
-              const status = job.conclusion === 'success' ? '✅' : '❌';
-              // job.name 'tdesign-vue (build)'
-              const regex = /^(\S+)\s+\((\S+)\)$/;
-              const match = job.name.match(regex);
-              tdesign[match[1]][`${match[2]}_status`] = status;
-              tdesign[match[1]][`${match[2]}_job`] = job.html_url;
-            })
+              "tdesign-vue": { ...scriptJob },
+              "tdesign-vue-next": { ...scriptJob },
+              "tdesign-react": { ...scriptJob },
+              "tdesign-web-components": { ...scriptJob },
+              "tdesign-mobile-vue": { ...scriptJob },
+              "tdesign-mobile-react": { ...scriptJob },
+            };
+            jobs
+              .filter((job) => job.name.startsWith("tdesign-"))
+              .map((job) => {
+                const status = job.conclusion === "success" ? "✅" : "❌";
+                // job.name 'tdesign-vue (build)'
+                const regex = /^(\S+)\s+\((\S+)\)$/;
+                const match = job.name.match(regex);
+                tdesign[match[1]][`${match[2]}_status`] = status;
+                tdesign[match[1]][`${match[2]}_job`] = job.html_url;
+              });
 
-            const run_url = `${context.serverUrl}//${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`
-            
-            const comment =`
-            # TDesign Component Repositories CI Test [Open](${run_url})
-            | Component | Lint | Test | Build |
-            | --------- | :--: | :--: | :----: |
-            ${Object.keys(tdesign).map(component => {
-              const lint_text = `[${tdesign[component]['lint_status']}](${tdesign[component]['lint_job']})`
-              const test_text = `[${tdesign[component]['test_status']}](${tdesign[component]['test_job']})`
-              const build_text = `[${tdesign[component]['build_status']}](${tdesign[component]['build_job']})`
-              return `| ${component} | ${lint_text} | ${test_text} | ${build_text} |`
-            }).join("\n")}
+            const run_url = `${context.serverUrl}//${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
 
-            <!-- TDesign Component Repositories CI Test -->
-            `
+            const comment = `
+              # TDesign Component Repositories CI Test [Open](${run_url})
+              | Component | Lint | Test | Build |
+              | --------- | :--: | :--: | :----: |
+              ${Object.keys(tdesign)
+                .map((component) => {
+                  const lint_text = `[${tdesign[component].lint_status}](${tdesign[component].lint_job})`;
+                  const test_text = `[${tdesign[component].test_status}](${tdesign[component].test_job})`;
+                  const build_text = `[${tdesign[component].build_status}](${tdesign[component].build_job})`;
+                  return `| ${component} | ${lint_text} | ${test_text} | ${build_text} |`;
+                })
+                .join("\n")}
+
+              <!-- TDesign Component Repositories CI Test -->
+              `;
             
             core.setOutput('comment', comment);
       
