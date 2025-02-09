@@ -224,13 +224,21 @@ jobs:
               run_id: context.runId,
               per_page: 100
             })
+            const ciJob = {
+              lint_status: "",
+              lint_job: "",
+              test_status: "",
+              test_job: "",
+              build_status: "",
+              build_job: "",
+            };
             const tdesign = {
-              "tdesign-vue": { ...scriptJob },
-              "tdesign-vue-next": { ...scriptJob },
-              "tdesign-react": { ...scriptJob },
-              "tdesign-web-components": { ...scriptJob },
-              "tdesign-mobile-vue": { ...scriptJob },
-              "tdesign-mobile-react": { ...scriptJob },
+              "tdesign-vue": { ...ciJob },
+              "tdesign-vue-next": { ...ciJob },
+              "tdesign-react": { ...ciJob },
+              "tdesign-web-components": { ...ciJob },
+              "tdesign-mobile-vue": { ...ciJob },
+              "tdesign-mobile-react": { ...ciJob },
             };
             jobs
               .filter((job) => job.name.startsWith("tdesign-"))
@@ -243,10 +251,10 @@ jobs:
                 tdesign[match[1]][`${match[2]}_job`] = job.html_url;
               });
 
-            const run_url = `${context.serverUrl}//${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const runUrl = `${context.serverUrl}//${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
 
             const comment = `
-              # TDesign Component Repositories CI Test [Open](${run_url})
+              # TDesign Component Repositories CI Test [Open](${runUrl})
               | Component | Lint | Test | Build |
               | --------- | :--: | :--: | :----: |
               ${Object.keys(tdesign)
