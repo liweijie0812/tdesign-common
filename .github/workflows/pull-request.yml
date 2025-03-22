@@ -18,7 +18,16 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout tdesign-react
+        uses: actions/checkout@v4
+        with:
+          repository: Tencent/tdesign-react
+
+      - name: Checkout tdesign-common
+        uses: actions/checkout@v4
+        with:
+          path: packages/common
+          
       - uses: pnpm/action-setup@v4
         with:
           version: 9
