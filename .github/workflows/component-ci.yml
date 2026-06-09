@@ -324,7 +324,6 @@ jobs:
                 .join("\n")}
             `;
 
-            core.setOutput('report', report);
             require('fs').writeFileSync('report.txt', report);
 
       - run: echo ${{ github.event.number }} > pr-id.txt
