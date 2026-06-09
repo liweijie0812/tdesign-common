@@ -8,6 +8,8 @@ on:
       - 'docs/**'
       - 'js/**'
       - 'style/**'
+      - '.github/workflows/component-ci.yml'
+      - '.github/workflows/component-ci-call.yml'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
